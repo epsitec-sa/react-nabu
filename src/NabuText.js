@@ -3,7 +3,7 @@ import React, {Component, PropTypes}  from 'react';
 import {injectIntl} from 'react-intl';
 import { connect } from 'react-redux';
 import Badge from 'material-ui/lib/badge';
-
+import {addMessage} from 'redux-nabu';
 
 @connect (
   state => ({
@@ -31,11 +31,7 @@ class NabuText extends Component {
     const mustAdd = !messages.has (msgid);
     if (mustAdd) {
       console.log ('NABU_ADD_MESSAGE:', msgid);
-      dispatch ({
-        type: 'NABU_ADD_MESSAGE',
-        messageId: msgid,
-        description: desc
-      });
+      dispatch (addMessage (msgid, desc));
     }
   }
 

@@ -6,6 +6,7 @@ import TableRow from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TextField from 'material-ui/lib/text-field';
 import Checkbox from 'material-ui/lib/checkbox';
+import {translate} from 'redux-nabu';
 
 @connect (
   state => ({
@@ -17,7 +18,7 @@ export default class NabuTranslator extends Component {
     const {dispatch, locale, msg} = this.props;
 
     const translate = (id, value) => {
-      dispatch ({type: 'NABU_TRANSLATE',locale: locale, messageId: id, value: value});
+      dispatch (translate (locale, id, value));
     };
 
     return (

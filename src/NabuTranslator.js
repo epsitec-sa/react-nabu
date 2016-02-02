@@ -11,7 +11,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Toggle from 'material-ui/lib/toggle';
 
 import NabuTable from './NabuTable.js';
-
+import {changeLocale, toggleMarker} from 'redux-nabu';
 //THEME
 import theme from './nabu-theme.js';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -27,9 +27,8 @@ import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
 class NabuTranslator extends Component {
   render () {
     const {dispatch, locale, translator, marker, store} = this.props;
-    const setLocale = (e, index, value) => dispatch ({type: 'NABU_CHANGE_LOCALE',locale: value});
-    const save = () => dispatch ({type: 'NABU_SAVE'});
-    const toggleMarks = () => dispatch ({type: 'NABU_TOGGLE_MARKS'});
+    const setLocale = (e, index, value) => dispatch (changeLocale (value));
+    const toggleMarks = () => dispatch (toggleMarker ());
     return (
       <div>
         <Toolbar>
