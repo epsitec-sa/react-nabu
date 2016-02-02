@@ -17,7 +17,7 @@ export default class NabuTranslator extends Component {
   render () {
     const {dispatch, locale, msg} = this.props;
 
-    const translate = (id, value) => {
+    const translateValue = (id, value) => {
       dispatch (translate (locale, id, value));
     };
 
@@ -32,7 +32,7 @@ export default class NabuTranslator extends Component {
             multiLine={true}
             rows={1}
             rowsMax={4}
-            onChange={(e) => translate (msg.id, e.target.value)}
+            onChange={(e) => translateValue (msg.id, e.target.value)}
           />
 
         </TableRowColumn>
