@@ -1,21 +1,23 @@
 'use strict';
-import React, {Component, PropTypes}  from 'react';
-import {injectIntl} from 'react-intl';
-import { connect } from 'react-redux';
+
+import React, {Component, PropTypes} from 'react';
+import {injectIntl}                  from 'react-intl';
+import {connect}                     from 'react-redux';
+import {addMessage}                  from 'redux-nabu';
+
 import Badge from 'material-ui/lib/badge';
-import {addMessage} from 'redux-nabu';
 
 @connect (
   state => ({
     messages: state.nabu.get (state.nabu.get ('locale')),
-    gen: state.nabu.get ('nabuGen'),
-    marker: state.nabu.get ('marker')
-  }), null, null, {pure: true})
+    gen:      state.nabu.get ('nabuGen'),
+    marker:   state.nabu.get ('marker')
+  }), null, null, {pure: true}
+)
 class NabuText extends Component {
-
   static propTypes = {
     msgid: PropTypes.string.isRequired,
-    desc: PropTypes.string
+    desc:  PropTypes.string
   };
 
   mustTranslate (messages, msgid) {
@@ -27,7 +29,7 @@ class NabuText extends Component {
   }
 
   mustAdd (props) {
-    const { messages, msgid, desc, dispatch } = props;
+    const {messages, msgid, desc, dispatch} = props;
     const mustAdd = !messages.has (msgid);
     if (mustAdd) {
       console.log ('NABU_ADD_MESSAGE:', msgid);
@@ -36,7 +38,7 @@ class NabuText extends Component {
   }
 
   showInTools (props) {
-    const { messages, msgid, dispatch } = props;
+    const {messages, msgid, dispatch} = props;
     const canShow = !messages.has (msgid);
     if (canShow) {
       console.log ('NABU_ADD_IN_TABLE:', msgid);
@@ -57,7 +59,7 @@ class NabuText extends Component {
     this.showInTools (this.props);
   }
 
-  render() {
+  render () {
     const {
       marker,
       intl: {
@@ -73,14 +75,14 @@ class NabuText extends Component {
     } = this.props;
 
     const fallbackMessage = {
-        id: msgid,
+        id:             msgid,
         defaultMessage: msgid,
-        description: desc
+        description:    desc
     };
 
     const text = html ?
-      formatHTMLMessage (messages.get (msgid, fallbackMessage), values)
-      : formatMessage (messages.get (msgid, fallbackMessage), values);
+      formatHTMLMessage (messages.get (msgid, fallbackMessage), values) :
+      formatMessage (messages.get (msgid, fallbackMessage), values);
     const markerOn = this.mustTranslate (messages, msgid) && marker;
     const highliteStyle = {
       backgroundColor: 'rgba(10,200,100, .5)'

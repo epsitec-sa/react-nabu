@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-import { connect }                     from 'react-redux';
-import { translate }                   from 'redux-nabu';
+import React, {Component, PropTypes} from 'react';
+import {connect}                     from 'react-redux';
+import {translate}                   from 'redux-nabu';
 
 import TableRow       from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
@@ -13,7 +13,7 @@ import Checkbox       from 'material-ui/lib/checkbox';
   state => ({
     locale: state.nabu.get ('locale'),
     gen:    state.nabu.get ('nabuGen')
-  }), null, null, { pure: true }
+  }), null, null, {pure: true}
 )
 export default class NabuTranslator extends Component {
   render () {
