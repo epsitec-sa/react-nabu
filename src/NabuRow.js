@@ -9,16 +9,10 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TextField      from 'material-ui/lib/text-field';
 import Checkbox       from 'material-ui/lib/checkbox';
 
-@connect (
-  state => ({
-    locale: state.nabu.get ('locale'),
-    gen:    state.nabu.get ('nabuGen')
-  }), null, null, {pure: true}
-)
-export default class NabuTranslator extends Component {
+export default class NabuRow extends Component {
   render () {
     const {dispatch, locale, msg} = this.props;
-
+    const msgId = msg.get ('id');
     const translateValue = (id, value) => {
       dispatch (translate (locale, id, value));
     };
@@ -26,20 +20,20 @@ export default class NabuTranslator extends Component {
     return (
       <TableRow>
         <TableRowColumn columnNumber={1}>
-          <span>{msg.id}</span><span style={{margin: '15px'}}>({msg.description || '-'})</span>
+          <span>{msgId}</span><span style={{margin: '15px'}}>({msg.get ('description', '-')})</span>
         </TableRowColumn>
         <TableRowColumn columnNumber={2} style={{minWidth: '200px'}}>
           <TextField
-            value={msg.defaultMessage}
+            value={msg.get ('defaultMessage')}
             multiLine={true}
             rows={1}
             rowsMax={4}
-            onChange={(e) => translateValue (msg.id, e.target.value)}
+            onChange={(e) => translateValue (msgId, e.target.value)}
           />
         </TableRowColumn>
         <TableRowColumn>
           <Checkbox
-            defaultChecked={msg.translated}
+            defaultChecked={msg.get ('translated')}
             disabled={true}
           />
         </TableRowColumn>

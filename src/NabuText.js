@@ -1,5 +1,7 @@
 'use strict';
 
+import {fromJS} from 'immutable';
+
 import React, {Component, PropTypes} from 'react';
 import {injectIntl}                  from 'react-intl';
 import {connect}                     from 'react-redux';
@@ -10,7 +12,6 @@ import Badge from 'material-ui/lib/badge';
 @connect (
   state => ({
     messages: state.nabu.get (state.nabu.get ('locale')),
-    gen:      state.nabu.get ('nabuGen'),
     marker:   state.nabu.get ('marker')
   }), null, null, {pure: true}
 )
@@ -60,15 +61,17 @@ class NabuText extends Component {
       values
     } = this.props;
 
-    const fallbackMessage = {
+    const fallbackMessage = fromJS ({
         id:             msgid,
         defaultMessage: msgid,
         description:    desc
-    };
+    });
+
+    const message = messages.get (msgid, fallbackMessage).toJS ();
 
     const text = html ?
-      formatHTMLMessage (messages.get (msgid, fallbackMessage), values) :
-      formatMessage (messages.get (msgid, fallbackMessage), values);
+      formatHTMLMessage (message, values) :
+      formatMessage (message, values);
     const markerOn = this.mustTranslate (messages, msgid) && marker;
     const highliteStyle = {
       backgroundColor: 'rgba(10,200,100, .5)'

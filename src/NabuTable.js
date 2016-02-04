@@ -13,13 +13,27 @@ import NabuRow from './NabuRow.js';
 
 @connect (
   state => ({
-    table:    state.nabu.getIn (['translator', 'table']),
-    messages: state.nabu.get (state.nabu.get ('locale'))
+    tableSize: state.nabu.getIn (['translator', 'tableSize'])
   }), null, null, {pure: true}
 )
-export default class NabuTranslator extends Component {
+export default class NabuTable extends Component {
   render () {
-    const {dispatch, messages, table} = this.props;
+    const {dispatch, tableSize} = this.props;
+
+    let messages = new Array (tableSize).fill (undefined);
+    let initialized = false;
+
+    const mapRowState = (state, index) => {
+      if (!initialized) {
+        messages = state.nabu.get (state.nabu.get ('locale')).toArray ();
+        initialized = true;
+      }
+
+      return {
+        locale: state.nabu.get ('locale'),
+        msg:    state.nabu.getIn ([state.nabu.get ('locale'), messages[index].get ('id')])
+      };
+    };
 
     return (
       <Table selectable={false}>
@@ -31,10 +45,9 @@ export default class NabuTranslator extends Component {
           </TableRow>
         </TableHeader>
         <TableBody selectable={false} stripedRows={true}>
-          {messages.toArray ().map ((msg, index) => {
-            return (
-              <NabuRow key={msg.id} msg={msg} />
-            );
+          {messages.map ((msg, index) => {
+            const Row = connect ((state) => mapRowState (state, index), null, null, {pure: true}) (NabuRow);
+            return (<Row key={index} />);
           })}
         </TableBody>
       </Table>
