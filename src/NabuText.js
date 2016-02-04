@@ -37,26 +37,12 @@ class NabuText extends Component {
     }
   }
 
-  showInTools (props) {
-    const {messages, msgid, dispatch} = props;
-    const canShow = !messages.has (msgid);
-    if (canShow) {
-      console.log ('NABU_ADD_IN_TABLE:', msgid);
-      dispatch ({
-        type: 'NABU_ADD_IN_TABLE',
-        messageId: msgid
-      });
-    }
-  }
-
   componentWillUpdate  (nextProps) {
     this.mustAdd (nextProps);
-    this.showInTools (nextProps);
   }
 
   componentDidMount () {
     this.mustAdd (this.props);
-    this.showInTools (this.props);
   }
 
   render () {
