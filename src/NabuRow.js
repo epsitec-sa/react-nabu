@@ -20,7 +20,7 @@ export default class NabuRow extends Component {
     return (
       <TableRow>
         <TableRowColumn columnNumber={1}>
-          <span>{msgId}</span><span style={{margin: '15px'}}>({msg.get ('description', '-')})</span>
+          <span>{msgId}</span><span style={{margin: '15px'}}>({msg.get ('description') || '-'})</span>
         </TableRowColumn>
         <TableRowColumn columnNumber={2} style={{minWidth: '200px'}}>
           <TextField

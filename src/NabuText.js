@@ -75,13 +75,13 @@ class NabuText extends Component {
     const markerOn = this.mustTranslate (messages, msgid) && marker;
     const highliteStyle = {
       backgroundColor: 'rgba(10,200,100, .5)'
-    }
+    };
 
     return (
-      <span style={markerOn ? highliteStyle : null} dangerouslySetInnerHTML={{__html:text}} >
+      <span style={markerOn ? highliteStyle : null} dangerouslySetInnerHTML={{__html: text}} >
         {children}
       </span>
-    )
+    );
   }
 }
 
