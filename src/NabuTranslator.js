@@ -33,12 +33,16 @@ class NabuTranslator extends Component {
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{
+            backgroundColor: '#eee'
+          }}
+        >
           <ToolbarGroup float="left">
             <Toggle
               label="Marker"
               onToggle={toggleMarks}
               toggled={marker}
+              style={{marginTop: '15px'}}
             />
           </ToolbarGroup>
           <ToolbarGroup float="right">

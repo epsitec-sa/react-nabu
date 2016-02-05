@@ -36,15 +36,50 @@ export default class NabuTable extends Component {
     };
 
     return (
-      <Table selectable={false}>
-        <TableHeader displaySelectAll={false}>
+      <Table
+        selectable={false}
+        fixedHeader={true}
+        style={{
+          backgroundColor: '#fff'
+        }}
+      >
+        <TableHeader
+          displaySelectAll={false}
+          adjustForCheckbox={false}
+          style={{
+            backgroundColor: '#eee'
+          }}
+        >
           <TableRow>
-            <TableHeaderColumn columnNumber={1}>ID</TableHeaderColumn>
-            <TableHeaderColumn columnNumber={2}>Translation</TableHeaderColumn>
-            <TableHeaderColumn columnNumber={3}>Translated</TableHeaderColumn>
+            <TableHeaderColumn
+              columnNumber={0}
+              style={{
+                fontSize: '15px',
+                textAlign: 'left',
+                color: '#666'
+              }}
+            >ID</TableHeaderColumn>
+            <TableHeaderColumn
+              columnNumber={1}
+              style={{
+                fontSize: '15px',
+                textAlign: 'left',
+                color: '#666'
+              }}
+            >Translation</TableHeaderColumn>
+            <TableHeaderColumn
+              columnNumber={2}
+              style={{
+                fontSize: '15px',
+                width: '10%',
+                padding: 0,
+                textAlign: 'center',
+                color: '#666'
+            }}
+            >Translated</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody selectable={false} stripedRows={true}>
+        <TableBody selectable={false} stripedRows={true} displayRowCheckbox={false}>
           {messages.map ((msg, index) => {
             const Row = connect ((state) => mapRowState (state, index), null, null, {pure: true}) (NabuRow);
             return (<Row key={index} />);
