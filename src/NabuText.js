@@ -62,9 +62,9 @@ class NabuText extends Component {
     } = this.props;
 
     const fallbackMessage = fromJS ({
-        id:             msgid,
-        defaultMessage: msgid,
-        description:    desc
+      id:             msgid,
+      defaultMessage: msgid,
+      description:    desc
     });
 
     const message = messages.get (msgid, fallbackMessage).toJS ();

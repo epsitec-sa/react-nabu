@@ -21,7 +21,7 @@ import NabuTranslator from './NabuTranslator.js';
 class NabuTranslatorPanel extends Component {
   render () {
     const {open} = this.props;
-    const panelStyle = open ? {width: '100%', height:'30%'} : {width: '0px'};
+    const panelStyle = open ? {width: '100%', height: '30%'} : {width: '0px'};
     return (
       <LeftNav open={open} style={panelStyle}>
         <NabuTranslator />
