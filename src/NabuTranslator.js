@@ -1,29 +1,31 @@
 'use strict';
-import React, {Component, PropTypes}  from 'react';
-import { connect } from 'react-redux';
 
+import React, {Component, PropTypes} from 'react';
+import {connect}                     from 'react-redux';
+import {changeLocale, toggleMarker}  from 'redux-nabu';
 
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import Toolbar      from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import Toggle from 'material-ui/lib/toggle';
+import MenuItem     from 'material-ui/lib/menus/menu-item';
+import Toggle       from 'material-ui/lib/toggle';
 
-import NabuTable from './NabuTable.js';
-import {changeLocale, toggleMarker} from 'redux-nabu';
-//THEME
-import theme from './nabu-theme.js';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
+// THEME
+import theme          from './nabu-theme.js';
+import ThemeManager   from 'material-ui/lib/styles/theme-manager';
 import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
 
-@ThemeDecorator(ThemeManager.getMuiTheme (theme))
+import NabuTable from './NabuTable.js';
+
+@ThemeDecorator (ThemeManager.getMuiTheme (theme))
 @connect (
   state => ({
     translator: state.nabu.get ('translator'),
-    marker: state.nabu.get ('marker'),
-    locale: state.nabu.get ('locale')
-  }), null, null, {pure: true})
+    marker:     state.nabu.get ('marker'),
+    locale:     state.nabu.get ('locale')
+  }), null, null, {pure: true}
+)
 class NabuTranslator extends Component {
   render () {
     const {dispatch, locale, translator, marker, store} = this.props;
@@ -31,12 +33,16 @@ class NabuTranslator extends Component {
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{
+            backgroundColor: '#eee'
+          }}
+        >
           <ToolbarGroup float="left">
             <Toggle
               label="Marker"
               onToggle={toggleMarks}
               toggled={marker}
+              style={{marginTop: '15px'}}
             />
           </ToolbarGroup>
           <ToolbarGroup float="right">
@@ -50,7 +56,7 @@ class NabuTranslator extends Component {
         </Toolbar>
         <NabuTable />
       </div>
-    )
+    );
   }
 }
 

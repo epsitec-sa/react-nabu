@@ -1,8 +1,9 @@
 'use strict';
-import Colors from 'material-ui/lib/styles/colors';
+
+import Colors           from 'material-ui/lib/styles/colors';
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
-import Spacing from 'material-ui/lib/styles/spacing';
-import zIndex from 'material-ui/lib/styles/zIndex';
+import Spacing          from 'material-ui/lib/styles/spacing';
+import zIndex           from 'material-ui/lib/styles/zIndex';
 
 const nabuTheme = {
   spacing: Spacing,
@@ -19,7 +20,7 @@ const nabuTheme = {
     alternateTextColor: Colors.white,
     canvasColor: Colors.white,
     borderColor: Colors.grey300,
-    disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
+    disabledColor: ColorManipulator.fade (Colors.darkBlack, 0.3),
     pickerHeaderColor: Colors.cyan500,
   }
 };
