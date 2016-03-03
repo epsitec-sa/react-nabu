@@ -1,6 +1,6 @@
 {
   "name": "react-nabu",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "i18n tools for react",
   "main": "lib/index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "react-redux": "^4.2.0",
     "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.2.0",
-    "redux-nabu": "^0.1.0"
+    "redux-nabu": "^0.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
