@@ -8,7 +8,7 @@ import zIndex           from 'material-ui/lib/styles/zIndex';
 const nabuTheme = {
   spacing: Spacing,
   zIndex: zIndex,
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: 'Lato, Roboto, sans-serif',
   palette: {
     primary1Color: Colors.cyan500,
     primary2Color: Colors.cyan700,
