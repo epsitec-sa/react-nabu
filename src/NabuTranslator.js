@@ -49,7 +49,7 @@ class NabuTranslator extends Component {
           <ToolbarGroup float="right">
             <ToolbarTitle text="Locale" />
             <DropDownMenu  value={locale} onChange={setLocale} >
-              {list.map ((locale) => <MenuItem value={locale} primaryText={locale} />)}
+              {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={locale} />)}
             </DropDownMenu>
           </ToolbarGroup>
         </Toolbar>
