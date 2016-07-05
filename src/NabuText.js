@@ -11,7 +11,7 @@ import Badge from 'material-ui/lib/badge';
 
 @connect (
   state => ({
-    messages: state.nabu.get (state.nabu.get ('locale')),
+    messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
     marker:   state.nabu.get ('marker')
   }), null, null, {pure: true}
 )

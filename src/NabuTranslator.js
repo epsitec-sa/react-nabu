@@ -23,12 +23,13 @@ import NabuTable from './NabuTable.js';
   state => ({
     translator: state.nabu.get ('translator'),
     marker:     state.nabu.get ('marker'),
-    locale:     state.nabu.get ('locale')
+    locale:     state.nabu.get ('locale'),
+    list:       state.nabu.get ('translations').keySeq ()
   }), null, null, {pure: true}
 )
 class NabuTranslator extends Component {
   render () {
-    const {dispatch, locale, translator, marker, store} = this.props;
+    const {dispatch, locale, translator, marker, list, store} = this.props;
     const setLocale = (e, index, value) => dispatch (changeLocale (value));
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
@@ -48,9 +49,7 @@ class NabuTranslator extends Component {
           <ToolbarGroup float="right">
             <ToolbarTitle text="Locale" />
             <DropDownMenu  value={locale} onChange={setLocale} >
-              <MenuItem value={'en_US'} primaryText='en_US' />
-              <MenuItem value={'fr_CH'} primaryText='fr_CH' />
-              <MenuItem value={'de_CH'} primaryText='de_CH' />
+              {list.map ((locale) => <MenuItem value={locale} primaryText={locale} />)}
             </DropDownMenu>
           </ToolbarGroup>
         </Toolbar>
