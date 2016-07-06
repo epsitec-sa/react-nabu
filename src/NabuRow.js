@@ -10,11 +10,18 @@ import TextField      from 'material-ui/lib/text-field';
 import Checkbox       from 'material-ui/lib/checkbox';
 import CheckCircle    from 'material-ui/lib/svg-icons/action/check-circle';
 
+
 export default class NabuRow extends Component {
+  constructor () {
+    super ();
+    this._prevLocale = null;
+  }
+
   render () {
     const {dispatch, locale, msg} = this.props;
     const msgId = msg.get ('id');
     const translateValue = (id, value) => {
+      this.setState ({value: value}); // Prevent a carret jump with first editing
       dispatch (translate (locale, id, value));
     };
 
@@ -36,7 +43,17 @@ export default class NabuRow extends Component {
           }}
         >
           <TextField
-            value={msg.get ('defaultMessage')}
+            ref='defaultMessage'
+            value={(() => {
+              // Change explicitly the field value only when a new locale is
+              // selected.
+              if (this._prevLocale !== locale) {
+                this._prevLocale = locale;
+                return msg.get ('defaultMessage');
+              }
+              return null;
+            }) ()}
+            defaultValue={msg.get ('defaultMessage')}
             multiLine={true}
             rows={1}
             rowsMax={4}
