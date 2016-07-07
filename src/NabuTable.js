@@ -42,6 +42,10 @@ export default class NabuTable extends Component {
         style={{
           backgroundColor: '#fff'
         }}
+        wrapperStyle={{
+          display: 'flex',
+          flexDirection: 'column'
+        }}
       >
         <TableHeader
           displaySelectAll={false}

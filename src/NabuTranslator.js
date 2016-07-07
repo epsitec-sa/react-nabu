@@ -33,7 +33,12 @@ class NabuTranslator extends Component {
     const setLocale = (e, index, value) => dispatch (changeLocale (value));
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
-      <div>
+      <div style={{
+        overflow: 'hidden',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         <Toolbar style={{
             backgroundColor: '#eee'
           }}
