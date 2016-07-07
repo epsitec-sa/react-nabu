@@ -2,7 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
-import {translate}                   from 'redux-nabu';
+import {translate, setFocus}         from 'redux-nabu';
 
 import TableRow       from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
@@ -62,6 +62,8 @@ export default class NabuRow extends Component {
               fontSize: '15px'
             }}
             onChange={(e) => translateValue (msgId, e.target.value)}
+            onFocus={() => dispatch (setFocus (msgId, true))}
+            onBlur={() => dispatch (setFocus (msgId, false))}
           />
         </TableRowColumn>
         <TableRowColumn

@@ -12,7 +12,8 @@ import Badge from 'material-ui/lib/badge';
 @connect (
   state => ({
     messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
-    marker:   state.nabu.get ('marker')
+    marker:   state.nabu.get ('marker'),
+    focus:    state.nabu.get ('focus')
   }), null, null, {pure: true}
 )
 class NabuText extends Component {
@@ -48,6 +49,7 @@ class NabuText extends Component {
   render () {
     const {
       marker,
+      focus,
       intl: {
         formatMessage,
         formatHTMLMessage
@@ -73,11 +75,23 @@ class NabuText extends Component {
       formatMessage (message, values);
     const markerOn = this.mustTranslate (messages, msgid) && marker;
     const highliteStyle = {
-      backgroundColor: 'rgba(10,200,100, .5)'
+      outline: 'none',
+      backgroundColor: 'rgba(10, 200, 100, .8)'
+    };
+    const focusStyle = {
+      boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)'
     };
 
+    let style = {};
+    if (markerOn) {
+      style = Object.assign (style, highliteStyle);
+    }
+    if (focus && msgid === focus) {
+      style = Object.assign (style, focusStyle);
+    }
+
     return (
-      <span style={markerOn ? highliteStyle : null} dangerouslySetInnerHTML={{__html: text}} >
+      <span style={style} dangerouslySetInnerHTML={{__html: text}} >
         {children}
       </span>
     );
