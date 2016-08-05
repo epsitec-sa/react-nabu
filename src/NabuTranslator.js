@@ -45,7 +45,7 @@ class NabuTranslator extends Component {
             backgroundColor: '#eee'
           }}
         >
-          <ToolbarGroup float="left">
+          <ToolbarGroup>
             <Toggle
               label="Marker"
               onToggle={toggleMarks}
@@ -53,7 +53,7 @@ class NabuTranslator extends Component {
               style={{marginTop: '15px'}}
             />
           </ToolbarGroup>
-          <ToolbarGroup float="right">
+          <ToolbarGroup>
             <ToolbarTitle text="Locale" />
             <DropDownMenu  value={locale} onChange={setLocale} >
               {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={locale} />)}
