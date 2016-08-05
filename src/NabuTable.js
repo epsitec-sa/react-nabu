@@ -3,11 +3,13 @@
 import React, {Component, PropTypes}  from 'react';
 import {connect}                      from 'react-redux';
 
-import Table             from 'material-ui/lib/table/table';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow          from 'material-ui/lib/table/table-row';
-import TableHeader       from 'material-ui/lib/table/table-header';
-import TableBody         from 'material-ui/lib/table/table-body';
+import {
+  Table,
+  TableHeaderColumn,
+  TableRow,
+  TableHeader,
+  TableBody
+} from 'material-ui/Table';
 
 import NabuRow from './NabuRow.js';
 

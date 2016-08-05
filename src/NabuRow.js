@@ -4,11 +4,9 @@ import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
 import {translate, setFocus}         from 'redux-nabu';
 
-import TableRow       from 'material-ui/lib/table/table-row';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
-import TextField      from 'material-ui/lib/text-field';
-import Checkbox       from 'material-ui/lib/checkbox';
-import CheckCircle    from 'material-ui/lib/svg-icons/action/check-circle';
+import {TableRow, TableRowColumn} from 'material-ui/Table';
+import TextField                  from 'material-ui/TextField';
+import CheckCircle                from 'material-ui/svg-icons/action/check-circle';
 
 
 export default class NabuRow extends Component {

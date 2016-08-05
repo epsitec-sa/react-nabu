@@ -26,15 +26,15 @@
   },
   "homepage": "https://github.com/epsitec-sa/react-nabu#readme",
   "peerDependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   },
   "dependencies": {
-    "material-ui": "^0.14.3",
+    "material-ui": "^0.15.3",
     "react-intl": "^2.0.0-beta-2",
     "react-redux": "^4.2.0",
-    "react-tap-event-plugin": "^0.2.2",
-    "redux": "^3.2.0",
+    "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.5.2",
     "redux-nabu": "^0.5.2"
   },
   "devDependencies": {
@@ -47,7 +47,7 @@
     "chai-immutable": "^1.5.3",
     "jsdom": "^8.0.2",
     "mocha": "^2.4.5",
-    "react": "^0.14.7",
+    "react": "^15.3.0",
     "rimraf": "^2.5.1"
   }
 }

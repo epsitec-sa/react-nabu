@@ -3,12 +3,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
 
-import LeftNav from 'material-ui/lib/left-nav';
+import Drawer from 'material-ui/Drawer';
 
 // THEME
 import theme          from './nabu-theme.js';
-import ThemeManager   from 'material-ui/lib/styles/theme-manager';
-import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
+import ThemeManager   from 'material-ui/styles/themeManager';
+import ThemeDecorator from 'material-ui/styles/themeDecorator';
 
 import NabuTranslator from './NabuTranslator.js';
 
@@ -23,9 +23,9 @@ class NabuTranslatorPanel extends Component {
     const {open} = this.props;
     const panelStyle = open ? {width: '100%', height: '30%'} : {width: '0px'};
     return (
-      <LeftNav open={open} style={panelStyle}>
+      <Drawer open={open} style={panelStyle}>
         <NabuTranslator />
-      </LeftNav>
+      </Drawer>
     );
   }
 }

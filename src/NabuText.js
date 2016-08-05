@@ -7,7 +7,6 @@ import {injectIntl}                  from 'react-intl';
 import {connect}                     from 'react-redux';
 import {addMessage}                  from 'redux-nabu';
 
-import Badge from 'material-ui/lib/badge';
 
 @connect (
   state => ({

@@ -4,17 +4,19 @@ import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
 import {changeLocale, toggleMarker}  from 'redux-nabu';
 
-import Toolbar      from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
-import DropDownMenu from 'material-ui/lib/DropDownMenu';
-import MenuItem     from 'material-ui/lib/menus/menu-item';
-import Toggle       from 'material-ui/lib/toggle';
+import {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle
+}                   from 'material-ui/Toolbar';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem     from 'material-ui/MenuItem';
+import Toggle       from 'material-ui/Toggle';
 
 // THEME
 import theme          from './nabu-theme.js';
-import ThemeManager   from 'material-ui/lib/styles/theme-manager';
-import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
+import ThemeManager   from 'material-ui/styles/themeManager';
+import ThemeDecorator from 'material-ui/styles/themeDecorator';
 
 import NabuTable from './NabuTable.js';
 
