@@ -88,7 +88,7 @@ export default class NabuTable extends Component {
         <TableBody selectable={false} stripedRows={true} displayRowCheckbox={false}>
           {messages.map ((msg, index) => {
             const Row = connect ((state) => mapRowState (state, index), null, null, {pure: true}) (NabuRow);
-            return (<Row key={index} />);
+            return (<Row key={index} keyId={`${index}`} />);
           })}
         </TableBody>
       </Table>

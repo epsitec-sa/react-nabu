@@ -16,7 +16,7 @@ export default class NabuRow extends Component {
   }
 
   render () {
-    const {dispatch, locale, msg} = this.props;
+    const {dispatch, locale, msg, keyId} = this.props;
     const msgId = msg.get ('id');
     const translateValue = (id, value) => {
       this.setState ({value: value}); // Prevent a carret jump with first editing
@@ -41,6 +41,7 @@ export default class NabuRow extends Component {
           }}
         >
           <TextField
+            id={keyId}
             ref='defaultMessage'
             value={(() => {
               // Change explicitly the field value only when a new locale is
