@@ -45,8 +45,6 @@
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
-    "jsdom": "^8.0.2",
-    "mocha": "^2.4.5",
     "react": "^15.3.0",
     "rimraf": "^2.5.1"
   }
