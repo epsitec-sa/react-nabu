@@ -42,10 +42,11 @@ class NabuTranslator extends Component {
           flexDirection: 'column'
         }}>
           <Toolbar style={{
-              backgroundColor: '#eee'
+              backgroundColor: '#eee',
+              display: '-webkit-box'
             }}
           >
-            <ToolbarGroup>
+            <ToolbarGroup style={{marginRight: '50px'}}>
               <Toggle
                 label="Marker"
                 onToggle={toggleMarks}
@@ -54,9 +55,8 @@ class NabuTranslator extends Component {
               />
             </ToolbarGroup>
             <ToolbarGroup>
-              <ToolbarTitle text="Locale" />
-              <DropDownMenu  value={locale} onChange={setLocale} >
-                {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={locale} />)}
+              <DropDownMenu value={locale} onChange={setLocale} >
+                {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={`Locale: ${locale}`} />)}
               </DropDownMenu>
             </ToolbarGroup>
           </Toolbar>
