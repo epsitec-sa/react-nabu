@@ -14,13 +14,12 @@ import MenuItem     from 'material-ui/MenuItem';
 import Toggle       from 'material-ui/Toggle';
 
 // THEME
-import theme          from './nabu-theme.js';
-import ThemeManager   from 'material-ui/styles/themeManager';
-import ThemeDecorator from 'material-ui/styles/themeDecorator';
+import theme            from './nabu-theme.js';
+import getMuiTheme      from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import NabuTable from './NabuTable.js';
 
-@ThemeDecorator (ThemeManager.getMuiTheme (theme))
 @connect (
   state => ({
     translator: state.nabu.get ('translator'),
@@ -35,33 +34,35 @@ class NabuTranslator extends Component {
     const setLocale = (e, index, value) => dispatch (changeLocale (value));
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
-      <div style={{
-        overflow: 'hidden',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <Toolbar style={{
-            backgroundColor: '#eee'
-          }}
-        >
-          <ToolbarGroup>
-            <Toggle
-              label="Marker"
-              onToggle={toggleMarks}
-              toggled={marker}
-              style={{marginTop: '15px'}}
-            />
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <ToolbarTitle text="Locale" />
-            <DropDownMenu  value={locale} onChange={setLocale} >
-              {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={locale} />)}
-            </DropDownMenu>
-          </ToolbarGroup>
-        </Toolbar>
-        <NabuTable />
-      </div>
+      <MuiThemeProvider muiTheme={getMuiTheme (theme)}>
+        <div style={{
+          overflow: 'hidden',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <Toolbar style={{
+              backgroundColor: '#eee'
+            }}
+          >
+            <ToolbarGroup>
+              <Toggle
+                label="Marker"
+                onToggle={toggleMarks}
+                toggled={marker}
+                style={{marginTop: '15px'}}
+              />
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <ToolbarTitle text="Locale" />
+              <DropDownMenu  value={locale} onChange={setLocale} >
+                {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={locale} />)}
+              </DropDownMenu>
+            </ToolbarGroup>
+          </Toolbar>
+          <NabuTable />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

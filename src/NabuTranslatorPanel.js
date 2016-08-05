@@ -6,13 +6,12 @@ import {connect}                     from 'react-redux';
 import Drawer from 'material-ui/Drawer';
 
 // THEME
-import theme          from './nabu-theme.js';
-import ThemeManager   from 'material-ui/styles/themeManager';
-import ThemeDecorator from 'material-ui/styles/themeDecorator';
+import theme            from './nabu-theme.js';
+import getMuiTheme      from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import NabuTranslator from './NabuTranslator.js';
 
-@ThemeDecorator (ThemeManager.getMuiTheme (theme))
 @connect (
   state => ({
     open: state.nabu.getIn (['translator', 'isOpen'])
@@ -23,9 +22,11 @@ class NabuTranslatorPanel extends Component {
     const {open} = this.props;
     const panelStyle = open ? {width: '100%', height: '30%'} : {width: '0px'};
     return (
-      <Drawer open={open} style={panelStyle}>
-        <NabuTranslator />
-      </Drawer>
+      <MuiThemeProvider muiTheme={getMuiTheme (theme)}>
+        <Drawer open={open} style={panelStyle}>
+          <NabuTranslator />
+        </Drawer>
+      </MuiThemeProvider>
     );
   }
 }
