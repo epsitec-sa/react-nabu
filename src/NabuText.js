@@ -5,7 +5,7 @@ import {fromJS} from 'immutable';
 import React, {Component, PropTypes} from 'react';
 import {injectIntl}                  from 'react-intl';
 import {connect}                     from 'react-redux';
-import {addMessage}                  from 'redux-nabu';
+import {addMessage, setSelectedItem} from 'redux-nabu';
 
 import Badge from 'material-ui/lib/badge';
 
@@ -13,7 +13,9 @@ import Badge from 'material-ui/lib/badge';
   state => ({
     messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
     marker:   state.nabu.get ('marker'),
-    focus:    state.nabu.get ('focus')
+    focus:    state.nabu.get ('focus'),
+    selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
+    selectedItem: state.nabu.getIn (['selectionMode', 'selectedItemId'])
   }), null, null, {pure: true}
 )
 class NabuText extends Component {
@@ -46,6 +48,7 @@ class NabuText extends Component {
     this.mustAdd (this.props);
   }
 
+
   render () {
     const {
       marker,
@@ -59,14 +62,25 @@ class NabuText extends Component {
       msgid,
       desc,
       html,
-      values
+      values,
+      selectedItem,
+      selectionModeEnabled,
+      dispatch
     } = this.props;
+
 
     const fallbackMessage = fromJS ({
       id:             msgid,
       defaultMessage: msgid,
       description:    desc
     });
+
+    function onMouseEnter() {
+      if (selectionModeEnabled) {
+        dispatch (setSelectedItem (msgid, true));
+      }
+    }
+
 
     const message = messages.get (msgid, fallbackMessage).toJS ();
 
@@ -81,8 +95,16 @@ class NabuText extends Component {
     const focusStyle = {
       boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)'
     };
+    function getSelectionModeStyle(selected) {
+      let lineWidth = selected ? '2' : '1';
+      let transparency = selected ? '1.0' : '0.4';
 
-    let style = {};
+      return {
+        border: lineWidth + 'px solid rgba(200, 0, 0, ' + transparency + ')'
+      };
+    }
+
+    let style = { };
     if (markerOn) {
       style = Object.assign (style, highliteStyle);
     }
@@ -90,8 +112,12 @@ class NabuText extends Component {
       style = Object.assign (style, focusStyle);
     }
 
+    if (selectionModeEnabled) {
+      style = Object.assign (style, getSelectionModeStyle (selectedItem === msgid));
+    }
+
     return (
-      <span style={style} dangerouslySetInnerHTML={{__html: text}} >
+      <span style={style} dangerouslySetInnerHTML={{__html: text}} onMouseEnter={onMouseEnter} >
         {children}
       </span>
     );
