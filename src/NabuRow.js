@@ -11,6 +11,13 @@ import Checkbox       from 'material-ui/lib/checkbox';
 import CheckCircle    from 'material-ui/lib/svg-icons/action/check-circle';
 
 
+@connect (
+  state => ({
+    selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
+    selectedItem:    state.nabu.getIn (['selectionMode', 'selectedItemId'])
+  }), null, null, {pure: true}
+)
+
 export default class NabuRow extends Component {
   constructor () {
     super ();
@@ -18,7 +25,7 @@ export default class NabuRow extends Component {
   }
 
   render () {
-    const {dispatch, locale, msg} = this.props;
+    const {dispatch, locale, selectedItem, selectionModeEnabled, msg} = this.props;
     const msgId = msg.get ('id');
     const translateValue = (id, value) => {
       this.setState ({value: value}); // Prevent a carret jump with first editing
@@ -30,7 +37,8 @@ export default class NabuRow extends Component {
         <TableRowColumn
           columnNumber={0}
           style={{
-            fontSize: '15px'
+            fontSize: '15px',
+            border: selectionModeEnabled && selectedItem === msgId ? '2px solid red' : '0px'
           }}
         >
           <span>{msgId}</span><br />
