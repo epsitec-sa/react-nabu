@@ -3,13 +3,14 @@
 import {fromJS} from 'immutable';
 
 import React, {Component, PropTypes} from 'react';
-import {injectIntl}                  from 'react-intl';
 import {connect}                     from 'react-redux';
 import {addMessage, setSelectedItem} from 'redux-nabu';
+import formatMessage                 from './format.js';
 
 
 @connect (
   state => ({
+    locale:   state.nabu.get ('locale'),
     messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
     marker:   state.nabu.get ('marker'),
     focus:    state.nabu.get ('focus'),
@@ -17,6 +18,7 @@ import {addMessage, setSelectedItem} from 'redux-nabu';
     selectedItem: state.nabu.getIn (['selectionMode', 'selectedItemId'])
   }), null, null, {pure: true}
 )
+
 class NabuText extends Component {
   static propTypes = {
     msgid: PropTypes.string.isRequired,
@@ -52,13 +54,10 @@ class NabuText extends Component {
     const {
       marker,
       focus,
-      intl: {
-        formatMessage,
-        formatHTMLMessage
-      },
       children,
       messages,
       msgid,
+      locale,
       desc,
       html,
       values,
@@ -83,9 +82,8 @@ class NabuText extends Component {
 
     const message = messages.get (msgid, fallbackMessage).toJS ();
 
-    const text = html ?
-      formatHTMLMessage (message, values) :
-      formatMessage (message, values);
+    const text = formatMessage (locale, html, message, values);
+
     const markerOn = this.mustTranslate (messages, msgid) && marker;
     const highliteStyle = {
       outline: 'none',
@@ -123,4 +121,4 @@ class NabuText extends Component {
   }
 }
 
-module.exports = injectIntl (NabuText);
+module.exports = NabuText;
