@@ -27,13 +27,13 @@ export default class NabuTable extends Component {
 
     const mapRowState = (state, index) => {
       if (!initialized) {
-        messages = state.nabu.getIn (['translations', state.nabu.get ('locale')]).toArray ();
+        messages = state.nabu.getIn (['messages']).toArray ();
         initialized = true;
       }
 
       return {
-        locale: state.nabu.get ('locale'),
-        msg:    state.nabu.getIn (['translations', state.nabu.get ('locale'), messages[index].get ('id')])
+        locale: state.nabu.get ('selectedLocale'),
+        msg:    state.nabu.getIn (['messages', messages[index].get ('id')])
       };
     };
 

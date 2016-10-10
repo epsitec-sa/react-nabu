@@ -10,8 +10,7 @@ import formatMessage                 from './format.js';
 
 @connect (
   state => ({
-    locale:   state.nabu.get ('locale'),
-    messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
+    locale:   state.nabu.get ('selectedLocale'),
     marker:   state.nabu.get ('marker'),
     focus:    state.nabu.get ('focus'),
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
@@ -25,21 +24,24 @@ class NabuText extends Component {
     desc:  PropTypes.string
   };
 
-  mustTranslate (messages, msgid) {
-    const mustTranslate = !messages.has (msgid);
+  mustTranslate (message, locale) {
+    const mustTranslate = !message;
+
     if (mustTranslate) {
-      return mustTranslate;
+      return true;
     }
-    return !messages.getIn ([msgid, 'translated']);
+
+    return !message.getIn (['translations', locale]);
   }
 
   mustAdd (props) {
-    const {messages, msgid, desc, dispatch} = props;
-    const mustAdd = !messages.has (msgid);
+    const {message, msgid, desc, dispatch} = props;
+    const mustAdd = !message;
     if (mustAdd) {
       dispatch (addMessage (msgid, desc));
     }
   }
+
 
   componentWillUpdate  (nextProps) {
     this.mustAdd (nextProps);
@@ -55,7 +57,7 @@ class NabuText extends Component {
       marker,
       focus,
       children,
-      messages,
+      message,
       msgid,
       locale,
       desc,
@@ -67,11 +69,7 @@ class NabuText extends Component {
     } = this.props;
 
 
-    const fallbackMessage = fromJS ({
-      id:             msgid,
-      defaultMessage: msgid,
-      description:    desc
-    });
+    const translatedMessage = message ? message.getIn (['translations', locale, 'message'], msgid) : msgid;
 
     function onMouseEnter() {
       if (selectionModeEnabled) {
@@ -80,11 +78,9 @@ class NabuText extends Component {
     }
 
 
-    const message = messages.get (msgid, fallbackMessage).toJS ();
+    const text = formatMessage (locale, html, translatedMessage, values);
 
-    const text = formatMessage (locale, html, message, values);
-
-    const markerOn = this.mustTranslate (messages, msgid) && marker;
+    const markerOn = this.mustTranslate (message, locale) && marker;
     const highliteStyle = {
       outline: 'none',
       backgroundColor: 'rgba(10, 200, 100, .8)'
