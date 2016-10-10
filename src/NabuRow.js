@@ -24,10 +24,20 @@ export default class NabuRow extends Component {
 
   render () {
     const {dispatch, locale, selectedItem, selectionModeEnabled, msg, keyId} = this.props;
+
     const msgId = msg.get ('id');
+
     const translateValue = (id, value) => {
       this.setState ({value: value}); // Prevent a carret jump with first editing
-      dispatch (translate (locale, id, value));
+      if (id) {
+        dispatch (translate (locale, id, value));
+      }
+    };
+
+    const getMessage = (props) => {
+      const {locale, msg} = props;
+
+      return msg.getIn (['translations', locale, 'message']) || msg.get ('id');
     };
 
     return (
@@ -56,11 +66,11 @@ export default class NabuRow extends Component {
               // selected.
               if (this._prevLocale !== locale) {
                 this._prevLocale = locale;
-                return msg.get ('defaultMessage');
+                return getMessage (this.props);
               }
               return null;
             }) ()}
-            defaultValue={msg.get ('defaultMessage')}
+            defaultValue={getMessage (this.props)}
             multiLine={true}
             rows={1}
             rowsMax={4}
@@ -80,7 +90,7 @@ export default class NabuRow extends Component {
             textAlign: 'center'
           }}
         >
-        {msg.get ('translated') ? (<CheckCircle />) : null}
+        { msg.getIn (['translations', locale, 'message']) ? (<CheckCircle />) : (<div />)}
         </TableRowColumn>
       </TableRow>
     );
