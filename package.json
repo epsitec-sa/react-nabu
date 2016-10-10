@@ -35,7 +35,7 @@
     "react-redux": "^4.2.0",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
-    "redux-nabu": "^1.0.0"
+    "redux-nabu": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
