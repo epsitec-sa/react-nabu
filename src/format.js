@@ -28,7 +28,7 @@ function escapeValues(rawValues) {
 
 
 function formatMessage (locale, html, message, values) {
-  const formatter = new MessageFormat (locale).compile(message.defaultMessage);
+  const formatter = new MessageFormat (locale).compile(message);
 
   if (html) {
     return formatter (escapeValues (values));

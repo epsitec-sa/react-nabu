@@ -10,8 +10,8 @@ import formatMessage                 from './format.js';
 
 @connect (
   state => ({
-    locale:   state.nabu.get ('locale'),
-    messages: state.nabu.getIn (['translations', state.nabu.get ('locale')]),
+    locale:   state.nabu.get ('selectedLocale'),
+    messages: state.nabu.get ('messages'),
     marker:   state.nabu.get ('marker'),
     focus:    state.nabu.get ('focus'),
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
@@ -27,19 +27,22 @@ class NabuText extends Component {
 
   mustTranslate (messages, msgid) {
     const mustTranslate = !messages.has (msgid);
+
     if (mustTranslate) {
-      return mustTranslate;
+      return true;
     }
-    return !messages.getIn ([msgid, 'translated']);
+
+    return !messages.getIn ([msgid, 'translations', locale]);
   }
 
   mustAdd (props) {
     const {messages, msgid, desc, dispatch} = props;
     const mustAdd = !messages.has (msgid);
     if (mustAdd) {
-      dispatch (addMessage (msgid, desc));
+      dispatch (setMessage (msgid, null, desc, null));
     }
   }
+
 
   componentWillUpdate  (nextProps) {
     this.mustAdd (nextProps);
@@ -67,11 +70,7 @@ class NabuText extends Component {
     } = this.props;
 
 
-    const fallbackMessage = fromJS ({
-      id:             msgid,
-      defaultMessage: msgid,
-      description:    desc
-    });
+
 
     function onMouseEnter() {
       if (selectionModeEnabled) {
@@ -80,7 +79,7 @@ class NabuText extends Component {
     }
 
 
-    const message = messages.get (msgid, fallbackMessage).toJS ();
+    const message = messages.getIn ([msgid, 'translations', locale], msgid).toJS ();
 
     const text = formatMessage (locale, html, message, values);
 
