@@ -2,7 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
-import {changeLocale, toggleMarker}  from 'redux-nabu';
+import {changeSelectedLocale, toggleMarker}  from 'redux-nabu';
 
 import {
   Toolbar,
@@ -24,14 +24,14 @@ import NabuTable from './NabuTable.js';
   state => ({
     translator: state.nabu.get ('translator'),
     marker:     state.nabu.get ('marker'),
-    locale:     state.nabu.get ('locale'),
-    list:       state.nabu.get ('translations').keySeq ()
+    locale:     state.nabu.get ('selectedLocale'),
+    locales:    state.nabu.get ('locales')
   }), null, null, {pure: true}
 )
 class NabuTranslator extends Component {
   render () {
-    const {dispatch, locale, translator, marker, list, store} = this.props;
-    const setLocale = (e, index, value) => dispatch (changeLocale (value));
+    const {dispatch, locale, translator, marker, locales, store} = this.props;
+    const setLocale = (e, index, value) => dispatch (changeSelectedLocale (value));
     const toggleMarks = () => dispatch (toggleMarker ());
     return (
       <MuiThemeProvider muiTheme={getMuiTheme (theme)}>
@@ -56,7 +56,7 @@ class NabuTranslator extends Component {
             </ToolbarGroup>
             <ToolbarGroup>
               <DropDownMenu value={locale} onChange={setLocale} >
-                {list.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={`Locale: ${locale}`} />)}
+                {locales.map ((locale, index) => <MenuItem key={index} value={locale} primaryText={`Locale: ${locale}`} />)}
               </DropDownMenu>
             </ToolbarGroup>
           </Toolbar>
