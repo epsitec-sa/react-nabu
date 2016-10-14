@@ -12,10 +12,9 @@ import CheckCircle                from 'material-ui/svg-icons/action/check-circl
 @connect (
   state => ({
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
-    selectedItem:    state.nabu.getIn (['selectionMode', 'selectedItemId'])
+    selectedItem:         state.nabu.getIn (['selectionMode', 'selectedItemId'])
   }), null, null, {pure: true}
 )
-
 export default class NabuRow extends Component {
   constructor () {
     super ();
@@ -36,7 +35,6 @@ export default class NabuRow extends Component {
 
     const getMessage = (props) => {
       const {locale, msg} = props;
-
       return msg.getIn (['translations', locale, 'message']) || msg.get ('id');
     };
 

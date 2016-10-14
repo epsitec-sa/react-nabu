@@ -11,13 +11,11 @@ import NabuText                      from './NabuText.js';
   state => ({
   }), null, null, {pure: true}
 )
-
 class NabuTextWrapper extends Component {
   static propTypes = {
     msgid: PropTypes.string.isRequired,
     desc:  PropTypes.string
   };
-
 
   render () {
     const {msgid, ...other} = this.props;

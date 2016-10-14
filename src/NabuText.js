@@ -10,14 +10,13 @@ import formatMessage                 from './format.js';
 
 @connect (
   state => ({
-    locale:   state.nabu.get ('selectedLocale'),
-    marker:   state.nabu.get ('marker'),
-    focus:    state.nabu.get ('focus'),
+    locale:               state.nabu.get ('selectedLocale'),
+    marker:               state.nabu.get ('marker'),
+    focus:                state.nabu.get ('focus'),
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
-    selectedItem: state.nabu.getIn (['selectionMode', 'selectedItemId'])
+    selectedItem:         state.nabu.getIn (['selectionMode', 'selectedItemId'])
   }), null, null, {pure: true}
 )
-
 class NabuText extends Component {
   static propTypes = {
     msgid: PropTypes.string.isRequired,
@@ -26,12 +25,7 @@ class NabuText extends Component {
 
   mustTranslate (message, locale) {
     const mustTranslate = !message;
-
-    if (mustTranslate) {
-      return true;
-    }
-
-    return !message.getIn (['translations', locale]);
+    return mustTranslate ? true : !message.getIn (['translations', locale]);
   }
 
   mustAdd (props) {
@@ -42,7 +36,6 @@ class NabuText extends Component {
     }
   }
 
-
   componentWillUpdate  (nextProps) {
     this.mustAdd (nextProps);
   }
@@ -50,7 +43,6 @@ class NabuText extends Component {
   componentDidMount () {
     this.mustAdd (this.props);
   }
-
 
   render () {
     const {
@@ -68,15 +60,15 @@ class NabuText extends Component {
       dispatch
     } = this.props;
 
-
-    const translatedMessage = message ? message.getIn (['translations', locale, 'message'], msgid) : msgid;
+    const translatedMessage = message ?
+      message.getIn (['translations', locale, 'message'], msgid) :
+      msgid;
 
     function onMouseEnter() {
       if (selectionModeEnabled) {
         dispatch (setSelectedItem (msgid, true));
       }
     }
-
 
     const text = formatMessage (locale, html, translatedMessage, values);
 
@@ -97,7 +89,7 @@ class NabuText extends Component {
       };
     }
 
-    let style = { };
+    let style = {};
     if (markerOn) {
       style = Object.assign (style, highliteStyle);
     }
