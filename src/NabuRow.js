@@ -2,7 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
-import {translate, setFocus}         from 'redux-nabu';
+import {setMessage, setFocus}        from 'redux-nabu';
 
 import {TableRow, TableRowColumn} from 'material-ui/Table';
 import TextField                  from 'material-ui/TextField';
@@ -29,7 +29,7 @@ export default class NabuRow extends Component {
     const translateValue = (id, value) => {
       this.setState ({value: value}); // Prevent a carret jump with first editing
       if (id) {
-        dispatch (translate (locale, id, value));
+        dispatch (setMessage (id, locale, null, value));
       }
     };
 

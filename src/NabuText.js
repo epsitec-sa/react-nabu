@@ -4,7 +4,7 @@ import {fromJS} from 'immutable';
 
 import React, {Component, PropTypes} from 'react';
 import {connect}                     from 'react-redux';
-import {addMessage, setSelectedItem} from 'redux-nabu';
+import {setMessage, setSelectedItem} from 'redux-nabu';
 import formatMessage                 from './format.js';
 
 
@@ -32,7 +32,7 @@ class NabuText extends Component {
     const {message, msgid, desc, dispatch} = props;
     const mustAdd = !message;
     if (mustAdd) {
-      dispatch (addMessage (msgid, desc));
+      dispatch (setMessage (msgid, desc));
     }
   }
 
