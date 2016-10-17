@@ -29,11 +29,8 @@ class NabuText extends Component {
   }
 
   mustAdd (props) {
-    const {message, msgid, desc, dispatch} = props;
-    const mustAdd = !message;
-    if (mustAdd) {
-      dispatch (setMessage (msgid, null, desc));
-    }
+    const {msgid, desc, dispatch} = props;
+    dispatch (setMessage (msgid, null, desc));
   }
 
   componentWillUpdate  (nextProps) {
