@@ -1,6 +1,6 @@
 {
   "name": "react-nabu",
-  "version": "17.0.2",
+  "version": "17.0.3",
   "description": "i18n tools for react",
   "main": "lib/index.js",
   "scripts": {
