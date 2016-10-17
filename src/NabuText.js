@@ -32,7 +32,7 @@ class NabuText extends Component {
     const {message, msgid, desc, dispatch} = props;
     const mustAdd = !message;
     if (mustAdd) {
-      dispatch (setMessage (msgid, desc));
+      dispatch (setMessage (msgid, null, desc));
     }
   }
 
