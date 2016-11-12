@@ -61,7 +61,7 @@ class NabuText extends Component {
       message.getIn (['translations', locale, 'message'], msgid) :
       msgid;
 
-    function onMouseEnter() {
+    function onMouseEnter () {
       if (selectionModeEnabled) {
         dispatch (setSelectedItem (msgid, true));
       }
