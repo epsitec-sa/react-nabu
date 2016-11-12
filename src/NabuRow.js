@@ -39,12 +39,13 @@ export default class NabuRow extends Component {
     };
 
     return (
-      <TableRow displayBorder={false}>
+      <TableRow displayBorder={false} ref='rowMessage' style={{
+          backgroundColor: selectionModeEnabled && selectedItem === msgId ? '#ffc3c3' : 'transparent'
+        }}>
         <TableRowColumn
           columnNumber={0}
           style={{
-            fontSize: '15px',
-            border: selectionModeEnabled && selectedItem === msgId ? '2px solid red' : '0px'
+            fontSize: '15px'
           }}
         >
           <span>{msgId}</span><br />
