@@ -93,7 +93,6 @@ class NabuText extends Component {
     if (focus && msgid === focus) {
       style = Object.assign (style, focusStyle);
     }
-
     if (selectionModeEnabled) {
       style = Object.assign (style, getSelectionModeStyle (selectedItem === msgid));
     }
