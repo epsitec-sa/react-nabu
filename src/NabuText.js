@@ -90,11 +90,11 @@ class NabuText extends Component {
     if (markerOn) {
       style = Object.assign (style, highliteStyle);
     }
-    if (focus && msgid === focus) {
-      style = Object.assign (style, focusStyle);
-    }
     if (selectionModeEnabled) {
       style = Object.assign (style, getSelectionModeStyle (selectedItem === msgid));
+    }
+    if (focus && msgid === focus) {
+      style = Object.assign (style, focusStyle);
     }
 
     return (
