@@ -78,11 +78,11 @@ class NabuText extends Component {
       boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)'
     };
     function getSelectionModeStyle(selected) {
-      let lineWidth = selected ? '2' : '1';
-      let transparency = selected ? '1.0' : '0.4';
+      const lineWidth = selected ? '2' : '1';
+      const transparency = selected ? '1.0' : '0.4';
 
       return {
-        border: lineWidth + 'px solid rgba(200, 0, 0, ' + transparency + ')'
+        boxShadow: `0 0 0 ${lineWidth}px rgba(200, 0, 0, ${transparency})`
       };
     }
 
