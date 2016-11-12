@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import ReactDOM                      from 'react-dom';
 import {connect}                     from 'react-redux';
 import {translate, setFocus}         from 'redux-nabu';
 
@@ -21,6 +22,15 @@ export default class NabuRow extends Component {
     this._prevLocale = null;
   }
 
+  componentDidUpdate () {
+    const {selectedItem, selectionModeEnabled, msg} = this.props;
+
+    const msgId = msg.get ('id');
+    if (selectionModeEnabled && selectedItem === msgId) {
+      ReactDOM.findDOMNode (this).scrollIntoView (true);
+    }
+  }
+
   render () {
     const {dispatch, locale, selectedItem, selectionModeEnabled, msg, keyId} = this.props;
 
@@ -39,7 +49,7 @@ export default class NabuRow extends Component {
     };
 
     return (
-      <TableRow displayBorder={false} ref='rowMessage' style={{
+      <TableRow displayBorder={false} style={{
           backgroundColor: selectionModeEnabled && selectedItem === msgId ? '#ffc3c3' : 'transparent'
         }}>
         <TableRowColumn
