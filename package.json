@@ -30,10 +30,10 @@
     "react-dom": "^15.3.0"
   },
   "dependencies": {
-    "material-ui": "^0.15.3",
+    "material-ui": "^0.16.4",
     "messageformat": "^1.0.2",
     "react-redux": "^4.2.0",
-    "react-tap-event-plugin": "^1.0.0",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
     "redux-nabu": "^3.0.0"
   },
@@ -45,7 +45,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
-    "react": "^15.3.0",
+    "react": "^15.4.1",
     "rimraf": "^2.5.1"
   }
 }
