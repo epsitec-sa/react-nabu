@@ -7,13 +7,13 @@ const ESCAPED_CHARS = {
   '>': '&gt;',
   '<': '&lt;',
   '"': '&quot;',
-  '\'': '&#x27;',
+  "'": '&#x27;',
 };
 
 const UNSAFE_CHARS_REGEX = /[&><"']/g;
 
 function escape (str) {
-  return ('' + str).replace (UNSAFE_CHARS_REGEX, (match) => ESCAPED_CHARS[match]);
+  return ('' + str).replace (UNSAFE_CHARS_REGEX, match => ESCAPED_CHARS[match]);
 }
 
 function escapeValues (rawValues) {

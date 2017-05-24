@@ -1,20 +1,22 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import ReactDOM                      from 'react-dom';
-import {connect}                     from 'react-redux';
-import {translate, setFocus}         from 'redux-nabu';
+import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
+import {translate, setFocus} from 'redux-nabu';
 
 import {TableRow, TableRowColumn} from 'material-ui/Table';
-import TextField                  from 'material-ui/TextField';
-import CheckCircle                from 'material-ui/svg-icons/action/check-circle';
-
+import TextField from 'material-ui/TextField';
+import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 
 @connect (
   state => ({
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
-    selectedItem:         state.nabu.getIn (['selectionMode', 'selectedItemId'])
-  }), null, null, {pure: true}
+    selectedItem: state.nabu.getIn (['selectionMode', 'selectedItemId']),
+  }),
+  null,
+  null,
+  {pure: true}
 )
 export default class NabuRow extends Component {
   constructor () {
@@ -32,7 +34,14 @@ export default class NabuRow extends Component {
   }
 
   render () {
-    const {dispatch, locale, selectedItem, selectionModeEnabled, msg, keyId} = this.props;
+    const {
+      dispatch,
+      locale,
+      selectedItem,
+      selectionModeEnabled,
+      msg,
+      keyId,
+    } = this.props;
 
     const msgId = msg.get ('id');
 
@@ -43,19 +52,24 @@ export default class NabuRow extends Component {
       }
     };
 
-    const getMessage = (props) => {
+    const getMessage = props => {
       const {locale, msg} = props;
       return msg.getIn (['translations', locale, 'message']) || msg.get ('id');
     };
 
     return (
-      <TableRow displayBorder={false} style={{
-          backgroundColor: selectionModeEnabled && selectedItem === msgId ? '#ffc3c3' : 'transparent'
-        }}>
+      <TableRow
+        displayBorder={false}
+        style={{
+          backgroundColor: selectionModeEnabled && selectedItem === msgId
+            ? '#ffc3c3'
+            : 'transparent',
+        }}
+      >
         <TableRowColumn
           columnNumber={0}
           style={{
-            fontSize: '15px'
+            fontSize: '15px',
           }}
         >
           <span>{msgId}</span><br />
@@ -64,12 +78,12 @@ export default class NabuRow extends Component {
         <TableRowColumn
           columnNumber={1}
           style={{
-            minWidth: '200px'
+            minWidth: '200px',
           }}
         >
           <TextField
             id={keyId}
-            ref='defaultMessage'
+            ref="defaultMessage"
             value={(() => {
               // Change explicitly the field value only when a new locale is
               // selected.
@@ -85,9 +99,9 @@ export default class NabuRow extends Component {
             rowsMax={4}
             style={{
               width: '100%',
-              fontSize: '15px'
+              fontSize: '15px',
             }}
-            onChange={(e) => translateValue (msgId, e.target.value)}
+            onChange={e => translateValue (msgId, e.target.value)}
             onFocus={() => dispatch (setFocus (msgId, true))}
             onBlur={() => dispatch (setFocus (msgId, false))}
           />
@@ -96,10 +110,12 @@ export default class NabuRow extends Component {
           columnNumber={2}
           style={{
             width: '10%',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
-        { msg.getIn (['translations', locale, 'message']) ? (<CheckCircle />) : (<div />)}
+          {msg.getIn (['translations', locale, 'message'])
+            ? <CheckCircle />
+            : <div />}
         </TableRowColumn>
       </TableRow>
     );

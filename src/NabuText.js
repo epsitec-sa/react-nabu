@@ -3,24 +3,26 @@
 import {fromJS} from 'immutable';
 
 import React, {Component, PropTypes} from 'react';
-import {connect}                     from 'react-redux';
+import {connect} from 'react-redux';
 import {addMessage, setSelectedItem} from 'redux-nabu';
-import formatMessage                 from './format.js';
-
+import formatMessage from './format.js';
 
 @connect (
   state => ({
-    locale:               state.nabu.get ('selectedLocale'),
-    marker:               state.nabu.get ('marker'),
-    focus:                state.nabu.get ('focus'),
+    locale: state.nabu.get ('selectedLocale'),
+    marker: state.nabu.get ('marker'),
+    focus: state.nabu.get ('focus'),
     selectionModeEnabled: state.nabu.getIn (['selectionMode', 'enabled']),
-    selectedItem:         state.nabu.getIn (['selectionMode', 'selectedItemId'])
-  }), null, null, {pure: true}
+    selectedItem: state.nabu.getIn (['selectionMode', 'selectedItemId']),
+  }),
+  null,
+  null,
+  {pure: true}
 )
 class NabuText extends Component {
   static propTypes = {
     msgid: PropTypes.string.isRequired,
-    desc:  PropTypes.string
+    desc: PropTypes.string,
   };
 
   mustTranslate (message, locale) {
@@ -33,7 +35,7 @@ class NabuText extends Component {
     dispatch (addMessage (msgid, desc));
   }
 
-  componentWillUpdate  (nextProps) {
+  componentWillUpdate (nextProps) {
     this.mustAdd (nextProps);
   }
 
@@ -54,12 +56,12 @@ class NabuText extends Component {
       values,
       selectedItem,
       selectionModeEnabled,
-      dispatch
+      dispatch,
     } = this.props;
 
-    const translatedMessage = message ?
-      message.getIn (['translations', locale, 'message'], msgid) :
-      msgid;
+    const translatedMessage = message
+      ? message.getIn (['translations', locale, 'message'], msgid)
+      : msgid;
 
     function onMouseEnter () {
       if (selectionModeEnabled) {
@@ -72,17 +74,17 @@ class NabuText extends Component {
     const markerOn = this.mustTranslate (message, locale) && marker;
     const highliteStyle = {
       outline: 'none',
-      backgroundColor: 'rgba(10, 200, 100, .8)'
+      backgroundColor: 'rgba(10, 200, 100, .8)',
     };
     const focusStyle = {
-      boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)'
+      boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)',
     };
-    function getSelectionModeStyle(selected) {
+    function getSelectionModeStyle (selected) {
       const lineWidth = selected ? '2' : '1';
       const transparency = selected ? '1.0' : '0.4';
 
       return {
-        boxShadow: `0 0 0 ${lineWidth}px rgba(200, 0, 0, ${transparency})`
+        boxShadow: `0 0 0 ${lineWidth}px rgba(200, 0, 0, ${transparency})`,
       };
     }
 
@@ -91,14 +93,21 @@ class NabuText extends Component {
       style = Object.assign (style, highliteStyle);
     }
     if (selectionModeEnabled) {
-      style = Object.assign (style, getSelectionModeStyle (selectedItem === msgid));
+      style = Object.assign (
+        style,
+        getSelectionModeStyle (selectedItem === msgid)
+      );
     }
     if (focus && msgid === focus) {
       style = Object.assign (style, focusStyle);
     }
 
     return (
-      <span style={style} dangerouslySetInnerHTML={{__html: text}} onMouseEnter={onMouseEnter} >
+      <span
+        style={style}
+        dangerouslySetInnerHTML={{__html: text}}
+        onMouseEnter={onMouseEnter}
+      >
         {children}
       </span>
     );

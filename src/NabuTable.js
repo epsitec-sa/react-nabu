@@ -1,22 +1,25 @@
 'use strict';
 
-import React, {Component, PropTypes}  from 'react';
-import {connect}                      from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
 import {
   Table,
   TableHeaderColumn,
   TableRow,
   TableHeader,
-  TableBody
+  TableBody,
 } from 'material-ui/Table';
 
 import NabuRow from './NabuRow.js';
 
 @connect (
   state => ({
-    tableSize: state.nabu.getIn (['translator', 'tableSize'])
-  }), null, null, {pure: true}
+    tableSize: state.nabu.getIn (['translator', 'tableSize']),
+  }),
+  null,
+  null,
+  {pure: true}
 )
 export default class NabuTable extends Component {
   render () {
@@ -33,7 +36,7 @@ export default class NabuTable extends Component {
 
       return {
         locale: state.nabu.get ('selectedLocale'),
-        msg:    state.nabu.getIn (['messages', messages[index].get ('id')])
+        msg: state.nabu.getIn (['messages', messages[index].get ('id')]),
       };
     };
 
@@ -42,18 +45,18 @@ export default class NabuTable extends Component {
         selectable={false}
         fixedHeader={true}
         style={{
-          backgroundColor: '#fff'
+          backgroundColor: '#fff',
         }}
         wrapperStyle={{
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
         }}
       >
         <TableHeader
           displaySelectAll={false}
           adjustForCheckbox={false}
           style={{
-            backgroundColor: '#eee'
+            backgroundColor: '#eee',
           }}
         >
           <TableRow>
@@ -62,17 +65,21 @@ export default class NabuTable extends Component {
               style={{
                 fontSize: '15px',
                 textAlign: 'left',
-                color: '#666'
+                color: '#666',
               }}
-            >ID</TableHeaderColumn>
+            >
+              ID
+            </TableHeaderColumn>
             <TableHeaderColumn
               columnNumber={1}
               style={{
                 fontSize: '15px',
                 textAlign: 'left',
-                color: '#666'
+                color: '#666',
               }}
-            >Translation</TableHeaderColumn>
+            >
+              Translation
+            </TableHeaderColumn>
             <TableHeaderColumn
               columnNumber={2}
               style={{
@@ -80,15 +87,26 @@ export default class NabuTable extends Component {
                 width: '10%',
                 padding: 0,
                 textAlign: 'center',
-                color: '#666'
-            }}
-            >Translated</TableHeaderColumn>
+                color: '#666',
+              }}
+            >
+              Translated
+            </TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody selectable={false} stripedRows={true} displayRowCheckbox={false}>
+        <TableBody
+          selectable={false}
+          stripedRows={true}
+          displayRowCheckbox={false}
+        >
           {messages.map ((msg, index) => {
-            const Row = connect ((state) => mapRowState (state, index), null, null, {pure: true}) (NabuRow);
-            return (<Row key={index} keyId={`${index}`} />);
+            const Row = connect (
+              state => mapRowState (state, index),
+              null,
+              null,
+              {pure: true}
+            ) (NabuRow);
+            return <Row key={index} keyId={`${index}`} />;
           })}
         </TableBody>
       </Table>
