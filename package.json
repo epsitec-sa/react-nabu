@@ -46,6 +46,7 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
     "react": "^15.4.1",
-    "rimraf": "^2.5.1"
+    "rimraf": "^2.5.1",
+    "xcraft-dev-rules": "^0.1.17"
   }
 }
