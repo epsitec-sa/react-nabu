@@ -30,7 +30,13 @@ export default class NabuTable extends Component {
 
     const mapRowState = (state, index) => {
       if (!initialized) {
-        messages = state.nabu.getIn (['messages']).toArray ();
+        messages = state.nabu.getIn (['messages']).toArray ().sort((a, b) => {
+            const m1 = a.get ('id').toLowerCase ();
+            const m2 = b.get ('id').toLowerCase ();
+            if (m1 < m2) return -1;
+            if (m2 > m1) return 1;
+            return 0;
+          });
         initialized = true;
       }
 
