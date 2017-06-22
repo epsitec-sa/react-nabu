@@ -7,7 +7,8 @@
     "prepublish": "babel src --out-dir lib",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startcraft": "npm run build"
   },
   "repository": {
     "type": "git",
