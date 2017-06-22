@@ -62,10 +62,20 @@ class NabuText extends Component {
     const translatedMessage = message
       ? message.getIn (['translations', locale, 'message'], msgid)
       : msgid;
+    let timeout;
 
     function onMouseEnter () {
       if (selectionModeEnabled) {
-        dispatch (setSelectedItem (msgid, true));
+        timeout = setTimeout (
+          () => dispatch (setSelectedItem (msgid, true)),
+          300
+        );
+      }
+    }
+
+    function onMouseLeave () {
+      if (selectionModeEnabled && timeout != undefined) {
+        clearTimeout (timeout);
       }
     }
 
@@ -107,6 +117,7 @@ class NabuText extends Component {
         style={style}
         dangerouslySetInnerHTML={{__html: text}}
         onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         {children}
       </span>
