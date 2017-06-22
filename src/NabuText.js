@@ -68,7 +68,7 @@ class NabuText extends Component {
       if (selectionModeEnabled) {
         timeout = setTimeout (
           () => dispatch (setSelectedItem (msgid, true)),
-          500
+          300
         );
       }
     }
