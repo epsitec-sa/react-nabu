@@ -27,14 +27,13 @@
   },
   "homepage": "https://github.com/epsitec-sa/react-nabu#readme",
   "peerDependencies": {
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.5.2"
   },
   "dependencies": {
-    "material-ui": "^0.16.4",
-    "messageformat": "^1.0.2",
-    "react-redux": "^4.2.0",
-    "react-tap-event-plugin": "^2.0.1",
+    "material-ui": "^0.20.2",
+    "messageformat": "^2.1.0",
+    "react-redux": "^5.0.7",
     "redux": "^3.5.2",
     "redux-nabu": "^3.0.0"
   },
@@ -46,7 +45,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
-    "react": "^15.4.1",
+    "react": "^16.0.1",
     "rimraf": "^2.5.1",
     "xcraft-dev-rules": "^0.1.17"
   }
