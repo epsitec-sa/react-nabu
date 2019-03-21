@@ -2,17 +2,12 @@
 
 import {fromJS} from 'immutable';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import NabuText from './NabuText.js';
 
 @connect (state => ({}), null, null, {pure: true})
 class NabuTextWrapper extends Component {
-  static propTypes = {
-    msgid: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-  };
-
   render () {
     const {msgid, ...other} = this.props;
 

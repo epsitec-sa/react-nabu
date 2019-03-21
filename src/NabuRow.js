@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {translate, setFocus} from 'redux-nabu';
@@ -72,7 +72,8 @@ export default class NabuRow extends Component {
             fontSize: '15px',
           }}
         >
-          <span>{msgId}</span><br />
+          <span>{msgId}</span>
+          <br />
           <span style={{color: '#999'}}>{msg.get ('description')}</span>
         </TableRowColumn>
         <TableRowColumn

@@ -2,7 +2,7 @@
 
 import {fromJS} from 'immutable';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addMessage, setSelectedItem} from 'redux-nabu';
 import formatMessage from './format.js';
@@ -20,11 +20,6 @@ import formatMessage from './format.js';
   {pure: true}
 )
 class NabuText extends Component {
-  static propTypes = {
-    msgid: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-  };
-
   mustTranslate (message, locale) {
     const mustTranslate = !message;
     return mustTranslate ? true : !message.getIn (['translations', locale]);
