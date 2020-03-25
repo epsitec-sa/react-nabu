@@ -1,6 +1,6 @@
 {
   "name": "react-nabu",
-  "version": "20.0.0",
+  "version": "21.0.0",
   "description": "i18n tools for react",
   "main": "lib/index.js",
   "scripts": {
@@ -33,9 +33,9 @@
   "dependencies": {
     "material-ui": "^0.20.2",
     "messageformat": "^2.1.0",
-    "react-redux": "^5.0.7",
-    "redux": "^3.5.2",
-    "redux-nabu": "^3.0.0"
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-nabu": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
@@ -47,6 +47,6 @@
     "chai-immutable": "^1.5.3",
     "react": "^16.0.1",
     "rimraf": "^2.5.1",
-    "xcraft-dev-rules": "^0.1.17"
+    "xcraft-dev-rules": "^1.0.2"
   }
 }
