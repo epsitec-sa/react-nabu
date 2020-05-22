@@ -1,30 +1,30 @@
-"use strict";
+'use strict';
 
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { addMessage, setSelectedItem } from "redux-nabu";
-import formatMessage from "./format.js";
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {addMessage, setSelectedItem} from 'redux-nabu';
+import formatMessage from './format.js';
 
-export default connect(
+const NabuText = connect(
   state => ({
-    locale: state.nabu.get("selectedLocale"),
-    marker: state.nabu.get("marker"),
-    focus: state.nabu.get("focus"),
-    selectionModeEnabled: state.nabu.getIn(["selectionMode", "enabled"]),
-    selectedItem: state.nabu.getIn(["selectionMode", "selectedItemId"])
+    locale: state.nabu.get('selectedLocale'),
+    marker: state.nabu.get('marker'),
+    focus: state.nabu.get('focus'),
+    selectionModeEnabled: state.nabu.getIn(['selectionMode', 'enabled']),
+    selectedItem: state.nabu.getIn(['selectionMode', 'selectedItemId']),
   }),
   null,
   null,
-  { pure: true }
+  {pure: true}
 )(
   class NabuText extends PureComponent {
     mustTranslate(message, locale) {
       const mustTranslate = !message;
-      return mustTranslate ? true : !message.getIn(["translations", locale]);
+      return mustTranslate ? true : !message.getIn(['translations', locale]);
     }
 
     mustAdd(props) {
-      const { msgid, desc, dispatch } = props;
+      const {msgid, desc, dispatch} = props;
       dispatch(addMessage(msgid, desc));
     }
 
@@ -49,11 +49,11 @@ export default connect(
         values,
         selectedItem,
         selectionModeEnabled,
-        dispatch
+        dispatch,
       } = this.props;
 
       const translatedMessage = message
-        ? message.getIn(["translations", locale, "message"], msgid)
+        ? message.getIn(['translations', locale, 'message'], msgid)
         : msgid;
       let timeout;
 
@@ -76,18 +76,18 @@ export default connect(
 
       const markerOn = this.mustTranslate(message, locale) && marker;
       const highliteStyle = {
-        outline: "none",
-        backgroundColor: "rgba(10, 200, 100, .8)"
+        outline: 'none',
+        backgroundColor: 'rgba(10, 200, 100, .8)',
       };
       const focusStyle = {
-        boxShadow: "0 0 10px 5px rgba(200, 0, 0, .8)"
+        boxShadow: '0 0 10px 5px rgba(200, 0, 0, .8)',
       };
       function getSelectionModeStyle(selected) {
-        const lineWidth = selected ? "2" : "1";
-        const transparency = selected ? "1.0" : "0.4";
+        const lineWidth = selected ? '2' : '1';
+        const transparency = selected ? '1.0' : '0.4';
 
         return {
-          boxShadow: `0 0 0 ${lineWidth}px rgba(200, 0, 0, ${transparency})`
+          boxShadow: `0 0 0 ${lineWidth}px rgba(200, 0, 0, ${transparency})`,
         };
       }
 
@@ -108,7 +108,7 @@ export default connect(
       return (
         <span
           style={style}
-          dangerouslySetInnerHTML={{ __html: text }}
+          dangerouslySetInnerHTML={{__html: text}}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
@@ -118,3 +118,5 @@ export default connect(
     }
   }
 );
+
+module.exports = NabuText;

@@ -1,29 +1,29 @@
-"use strict";
+'use strict';
 
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 
 import {
   Table,
   TableHeaderColumn,
   TableRow,
   TableHeader,
-  TableBody
-} from "material-ui/Table";
+  TableBody,
+} from 'material-ui/Table';
 
-import NabuRow from "./NabuRow.js";
+import NabuRow from './NabuRow.js';
 
-export default connect(
+const NabuTable = connect(
   state => ({
-    tableSize: state.nabu.getIn(["translator", "tableSize"])
+    tableSize: state.nabu.getIn(['translator', 'tableSize']),
   }),
   null,
   null,
-  { pure: true }
+  {pure: true}
 )(
   class NabuTable extends PureComponent {
     render() {
-      const { dispatch, tableSize } = this.props;
+      const {dispatch, tableSize} = this.props;
 
       let messages = new Array(tableSize).fill(undefined);
       let initialized = false;
@@ -31,11 +31,11 @@ export default connect(
       const mapRowState = (state, index) => {
         if (!initialized) {
           messages = state.nabu
-            .getIn(["messages"])
+            .getIn(['messages'])
             .toArray()
             .sort((a, b) => {
-              const m1 = a.get("id").toLowerCase();
-              const m2 = b.get("id").toLowerCase();
+              const m1 = a.get('id').toLowerCase();
+              const m2 = b.get('id').toLowerCase();
               if (m1 < m2) return -1;
               if (m1 > m2) return 1;
               return 0;
@@ -44,8 +44,8 @@ export default connect(
         }
 
         return {
-          locale: state.nabu.get("selectedLocale"),
-          msg: state.nabu.getIn(["messages", messages[index].get("id")])
+          locale: state.nabu.get('selectedLocale'),
+          msg: state.nabu.getIn(['messages', messages[index].get('id')]),
         };
       };
 
@@ -54,27 +54,27 @@ export default connect(
           selectable={false}
           fixedHeader={true}
           style={{
-            backgroundColor: "#fff"
+            backgroundColor: '#fff',
           }}
           wrapperStyle={{
-            display: "flex",
-            flexDirection: "column"
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <TableHeader
             displaySelectAll={false}
             adjustForCheckbox={false}
             style={{
-              backgroundColor: "#eee"
+              backgroundColor: '#eee',
             }}
           >
             <TableRow>
               <TableHeaderColumn
                 columnNumber={0}
                 style={{
-                  fontSize: "15px",
-                  textAlign: "left",
-                  color: "#666"
+                  fontSize: '15px',
+                  textAlign: 'left',
+                  color: '#666',
                 }}
               >
                 ID
@@ -82,9 +82,9 @@ export default connect(
               <TableHeaderColumn
                 columnNumber={1}
                 style={{
-                  fontSize: "15px",
-                  textAlign: "left",
-                  color: "#666"
+                  fontSize: '15px',
+                  textAlign: 'left',
+                  color: '#666',
                 }}
               >
                 Translation
@@ -92,11 +92,11 @@ export default connect(
               <TableHeaderColumn
                 columnNumber={2}
                 style={{
-                  fontSize: "15px",
-                  width: "10%",
+                  fontSize: '15px',
+                  width: '10%',
                   padding: 0,
-                  textAlign: "center",
-                  color: "#666"
+                  textAlign: 'center',
+                  color: '#666',
                 }}
               >
                 Translated
@@ -113,7 +113,7 @@ export default connect(
                 state => mapRowState(state, index),
                 null,
                 null,
-                { pure: true }
+                {pure: true}
               )(NabuRow);
               return <Row key={index} keyId={`${index}`} />;
             })}
@@ -123,3 +123,5 @@ export default connect(
     }
   }
 );
+
+module.exports = NabuTable;
