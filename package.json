@@ -47,6 +47,9 @@
     "chai-immutable": "^1.5.3",
     "react": "^16.12.0",
     "rimraf": "^2.5.1",
-    "xcraft-dev-rules": "^1.0.2"
-  }
+    "xcraft-dev-rules": "^1.0.2",
+    "prettier": "1.18.2",
+    "xcraft-dev-prettier": "^1.0.0"
+  },
+  "prettier": "xcraft-dev-prettier"
 }
