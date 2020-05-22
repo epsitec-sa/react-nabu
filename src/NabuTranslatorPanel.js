@@ -1,37 +1,38 @@
-'use strict';
+"use strict";
 
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
-import Drawer from 'material-ui/Drawer';
+import Drawer from "material-ui/Drawer";
 
 // THEME
-import theme from './nabu-theme.js';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from "./nabu-theme.js";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-import NabuTranslator from './NabuTranslator.js';
+import NabuTranslator from "./NabuTranslator.js";
 
-@connect (
+export default connect(
   state => ({
-    open: state.nabu.getIn (['translator', 'isOpen']),
+    open: state.nabu.getIn(["translator", "isOpen"])
   }),
   null,
   null,
-  {pure: true}
-)
-class NabuTranslatorPanel extends Component {
-  render () {
-    const {open} = this.props;
-    const panelStyle = open ? {width: '100%', height: '30%'} : {width: '0px'};
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme (theme)}>
-        <Drawer open={open} style={panelStyle}>
-          <NabuTranslator />
-        </Drawer>
-      </MuiThemeProvider>
-    );
+  { pure: true }
+)(
+  class NabuTranslatorPanel extends PureComponent {
+    render() {
+      const { open } = this.props;
+      const panelStyle = open
+        ? { width: "100%", height: "30%" }
+        : { width: "0px" };
+      return (
+        <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+          <Drawer open={open} style={panelStyle}>
+            <NabuTranslator />
+          </Drawer>
+        </MuiThemeProvider>
+      );
+    }
   }
-}
-
-module.exports = NabuTranslatorPanel;
+);
