@@ -70,7 +70,7 @@ const NabuRow = connect(
           <TableRowColumn
             columnNumber={0}
             style={{
-              fontSize: '15px',
+              fontSize: '12px',
             }}
           >
             <span>{msgId}</span>
@@ -98,10 +98,10 @@ const NabuRow = connect(
               defaultValue={getMessage(this.props)}
               multiLine={true}
               rows={1}
-              rowsMax={4}
+              rowsMax={10}
               style={{
                 width: '100%',
-                fontSize: '15px',
+                fontSize: '12px',
               }}
               onChange={e => translateValue(msgId, e.target.value)}
               onFocus={() => dispatch(setFocus(msgId, true))}
