@@ -33,6 +33,7 @@ const NabuTable = connect(
           messages = state.nabu
             .getIn(['messages'])
             .toArray()
+            .valueSeq()
             .sort((a, b) => {
               const m1 = a.get('id').toLowerCase();
               const m2 = b.get('id').toLowerCase();
