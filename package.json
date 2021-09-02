@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/epsitec-sa/react-nabu#readme",
   "peerDependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "*",
+    "react-dom": "*"
   },
   "dependencies": {
-    "material-ui": "^0.20.2",
+    "material-ui": "github:epsitec-sa/material-ui",
     "messageformat": "^2.1.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
